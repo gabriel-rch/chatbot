@@ -16,7 +16,11 @@ public class RMIServer implements Chat {
 
     @Override
     public String ask(String question) throws RemoteException {
-        return bot.answer(question);
+        System.out.println("Client: " + question);
+        var answer = bot.answer(question);
+        System.out.println("Server: " + answer);
+
+        return answer;
     }
 
     public static void main(String[] args) {
