@@ -9,8 +9,7 @@ public class SocketClient {
     private Socket socket;
     private ObjectOutputStream output;
     private ObjectInputStream input;
-    private Scanner scanner = new Scanner(System.in);
-    private String message;
+    private final Scanner scanner = new Scanner(System.in);
 
     public SocketClient(String serverAddress, int serverPort) {
         try {
@@ -54,6 +53,7 @@ public class SocketClient {
 
     public void startConversation() {
         try {
+            String message;
             do {
                 //recebe mensagem do servidor
                 message = (String) input.readObject();
@@ -75,7 +75,7 @@ public class SocketClient {
 
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException {
         final String ADDRESS = "localhost";
         final int PORT = readPort();
 
