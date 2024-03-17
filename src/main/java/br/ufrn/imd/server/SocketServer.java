@@ -49,15 +49,13 @@ public class SocketServer {
         try {
             while (true) {
                 //recebe message do cliente
-                message = (String) input.readObject();
+                String message = (String) input.readObject();
 
                 if (message.equalsIgnoreCase("fim")) {
                     return false;
                 }
 
-                if (message != null) {
-                    System.out.println("Client: " + message);
-                }
+                System.out.println("Client: " + message);
 
                 //escreve message para o servidor
                 System.out.print("Server >> ");
