@@ -9,11 +9,10 @@ public class SocketServer {
     private Socket clientSocket;
     private ObjectOutputStream output;
     private ObjectInputStream input;
-    final int PORT = 1338;
 
     public SocketServer() {
         try {
-            serverSocket = new ServerSocket(PORT);
+            serverSocket = new ServerSocket(1338);
             bot = new Chatbot();
             System.out.println("Servidor iniciado. Aguardando conexões...");
         } catch (IOException e) {
