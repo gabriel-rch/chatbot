@@ -2,23 +2,21 @@ package br.ufrn.imd.server;
 
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
 
 public class SocketServer {
-    final int PORT = 12345;
-    private ServerSocket serverSocket;
+    private final Chatbot bot;
+    private final ServerSocket serverSocket;
     private Socket clientSocket;
     private ObjectOutputStream output;
     private ObjectInputStream input;
-    private Scanner scanner = new Scanner(System.in);
-    private String message;
 
     public SocketServer() {
         try {
-            serverSocket = new ServerSocket(PORT);
+            serverSocket = new ServerSocket(1338);
+            bot = new Chatbot();
             System.out.println("Servidor iniciado. Aguardando conexões...");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -40,9 +38,8 @@ public class SocketServer {
             }
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return false;
     }
 
     public boolean startConversation() {
@@ -56,11 +53,10 @@ public class SocketServer {
                 }
 
                 System.out.println("Client: " + message);
+                var answer = bot.answer(message);
+                System.out.println("Server: " + answer);
 
-                //escreve message para o servidor
-                System.out.print("Server >> ");
-                message = scanner.nextLine();
-                output.writeObject(message);
+                output.writeObject(answer);
                 output.flush();
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -80,7 +76,7 @@ public class SocketServer {
                 clientSocket.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -98,7 +94,5 @@ public class SocketServer {
 
         server.closeConnection();
         System.out.println("Conexão encerrada pelo cliente");
-
     }
-
 }
