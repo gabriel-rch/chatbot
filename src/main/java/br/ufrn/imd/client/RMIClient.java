@@ -12,13 +12,14 @@ public class RMIClient implements Client {
     private Chat chat;
 
     @Override
-    public void connect() {
+    public boolean connect() {
         try {
-            var registry = LocateRegistry.getRegistry(null, 1337);
+            var registry = LocateRegistry.getRegistry("localhost", 1337);
             chat = (Chat) registry.lookup("Chat");
         } catch (RemoteException | NotBoundException e) {
-            throw new RuntimeException(e);
+            return false;
         }
+        return true;
     }
 
     @Override

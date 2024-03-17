@@ -13,12 +13,9 @@ public class SocketClient implements Client {
     private final Scanner scanner = new Scanner(System.in);
 
     @Override
-    public void connect() {
-        final String ADDRESS = "localhost";
-        final int PORT = 1338;
-
+    public boolean connect() {
         try {
-            socket = new Socket(ADDRESS, PORT);
+            socket = new Socket("localhost", 1338);
 
             // Para enviar mensagens para o servidor
             output = new ObjectOutputStream(socket.getOutputStream());
@@ -30,10 +27,10 @@ public class SocketClient implements Client {
             if (output != null) {
                 System.out.println("Conexão estabelecida com o servidor.");
             }
-
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return false;
         }
+        return true;
     }
 
     @Override

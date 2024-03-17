@@ -1,6 +1,6 @@
 package br.ufrn.imd.interfaces;
 
 public interface Client {
-    void connect();
+    boolean connect();
     void startConversation();
 }
