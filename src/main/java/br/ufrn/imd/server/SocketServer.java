@@ -14,7 +14,7 @@ public class SocketServer {
         try {
             serverSocket = new ServerSocket(1338);
             bot = new Chatbot();
-            System.out.println("Servidor iniciado. Aguardando conexões...");
+            System.out.println("Server ready!");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

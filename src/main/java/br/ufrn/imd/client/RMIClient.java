@@ -28,10 +28,10 @@ public class RMIClient implements Client {
         String question, answer = null;
         do {
             if (answer != null) {
-                System.out.println("Server: " + answer);
+                System.out.println("Chatbot: " + answer);
             }
 
-            System.out.print("Client >> ");
+            System.out.print("You >> ");
             question = scanner.nextLine();
 
             try {
@@ -40,6 +40,6 @@ public class RMIClient implements Client {
                 throw new RuntimeException(e);
             }
 
-        } while (!question.equalsIgnoreCase("fim"));
+        } while (!question.equalsIgnoreCase("bye"));
     }
 }

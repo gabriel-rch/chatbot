@@ -25,7 +25,7 @@ public class SocketClient implements Client {
             input = new ObjectInputStream(socket.getInputStream());
 
             if (output != null) {
-                System.out.println("Conexão estabelecida com o servidor.");
+                System.out.println("Connection received!");
             }
         } catch (IOException e) {
             return false;
@@ -42,16 +42,16 @@ public class SocketClient implements Client {
                 message = (String) input.readObject();
 
                 if (message != null) {
-                    System.out.println("Server: " + message);
+                    System.out.println("Chatbot: " + message);
                 }
 
                 // Escreve mensagem para o servidor
-                System.out.print("Client >> ");
+                System.out.print("You >> ");
                 message = scanner.nextLine();
                 output.writeObject(message);
                 output.flush();
 
-            } while (!message.equalsIgnoreCase("fim"));
+            } while (!message.equalsIgnoreCase("bye"));
 
             // Encerramento da conexão após o loop
             input.close();

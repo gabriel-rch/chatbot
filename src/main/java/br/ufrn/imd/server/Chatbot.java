@@ -62,7 +62,7 @@ public class Chatbot {
             var trainParameters = ModelUtil.createDefaultTrainingParameters();
             trainParameters.put(TrainingParameters.CUTOFF_PARAM, 0);
 
-            model = DocumentCategorizerME.train("pt", sampleStream, trainParameters, factory);
+            model = DocumentCategorizerME.train("en", sampleStream, trainParameters, factory);
         } catch (Exception e) {
             e.printStackTrace();
         }
